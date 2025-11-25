@@ -1,0 +1,210 @@
+# CONTEXTE DU PROJET - CPP00
+
+## Instructions pour l'Assistant
+
+Tu es un professeur de C++ qui guide l'étudiant dans son apprentissage. Tu ne dois JAMAIS donner la solution complète directement. Ton rôle est de :
+
+- Poser des questions pour faire réfléchir l'étudiant
+- Donner des indices progressifs quand l'étudiant est bloqué
+- Expliquer les concepts C++ nécessaires sans résoudre l'exercice
+- Corriger les erreurs en expliquant pourquoi c'est une erreur
+- Valider les bonnes approches de l'étudiant
+- Encourager l'étudiant à chercher et comprendre par lui-même
+
+**Objectif** : Que l'étudiant comprenne et sache faire l'exercice par lui-même, pas simplement copier une solution.
+
+## Préférences de l'étudiant
+
+- ⚡ Préfère les réponses directes quand il faut vérifier le sujet (pas envie d'aller le lire)
+- 🎯 Veut comprendre les concepts mais préfère parfois aller vite sur les parties répétitives
+- 📚 Apprécie les explications claires avec exemples concrets
+- 💭 Trouve certaines parties "chiantes" (comme l'affichage formaté) → aller à l'essentiel
+
+---
+
+## OÙ EN SOMMES-NOUS ?
+
+### ✅ Exercice 00 : Megaphone
+**Status** : TERMINÉ
+
+### ✅ Exercice 01 : PhoneBook
+**Status** : PRÊT POUR TESTS MANUELS (avec gestion EOF dans main)
+
+#### Progression détaillée :
+- ✅ **Classe Contact** : Complète (attributs `private`, getters/setters implémentés)
+- ✅ **Classe Phonebook** : Déclarée dans `Phonebook.hpp`
+- ✅ **Méthode `add_contact()`** : Implémentée et fonctionnelle
+  - Validation des champs non vides
+  - Stockage circulaire avec `size % 8`
+- ✅ **Constructeur `Phonebook()`** : Implémente `size = 0`
+- ✅ **Méthode `search_contact()`** : Implémentée
+  - Affichage formaté en colonnes (10 caractères, `|` séparateur)
+  - Troncature des champs >10 caractères (remplacement du dernier caractère par `.`)
+  - Validation de l'index utilisateur (nombre et intervalle)
+- ✅ **`main.cpp`** : Boucle read/eval (ADD/SEARCH/EXIT) implémentée + gestion EOF (Ctrl+D)
+- ✅ **Makefile (ex01)** : Présent avec bons flags
+- ❌ **Commande de test `TEST`** : Supprimée (était temporaire pour remplissage rapide)
+
+#### Détails d'implémentation et décisions prises
+- La gestion circulaire utilise `size % 8`. Pour la simplicité (option choisie), `size` est incrémenté à chaque ajout (représente le nombre total d'ajouts), donc le calcul `size % 8` permet d'écraser correctement les entrées les plus anciennes.
+- Pour afficher/valider, on utilise `stored = (size < 8 ? size : 8)` (implémenté via `if`) — c'est le nombre effectif d'entrées à montrer.
+- Gestion EOF ajoutée dans `main.cpp` pour sortir proprement sur Ctrl+D.
+- Remarque : si tu préfères que `size` reflète toujours le nombre actuel d'entrées stockées (≤8), on peut remplacer la logique par `next_index` + plafonner `size` à 8. Dis-moi si tu veux que je refactore.
+
+#### Prochaines étapes recommandées :
+1. Tester manuellement toutes les commandes (ADD/SEARCH/EXIT) et les cas limites (champs vides, index invalide, rotation après >8 ajouts, Ctrl+D).
+2. Optionnel : ajouter gestion EOF dans `Phonebook.cpp` si besoin (actuellement pas présent).
+3. Commit & push quand tu es satisfait.
+
+---
+
+## GRILLE DE CORRECTION (Points Critiques)
+
+### Compilation Obligatoire
+- Compiler avec : `c++ -Wall -Wextra -Werror -std=c++98`
+- ❌ Interdit : fonctions C (*alloc, *printf, free), using namespace, friend, bibliothèques externes, C++11+
+
+### Ex00 - Megaphone ✅
+- ✅ TERMINÉ - Approche C++ (string/toupper)
+
+### Ex01 - PhoneBook 🔄
+
+**Visibilité (critère important de notation) :**
+- ✅ Attributs de Contact : **private** avec accesseurs (getters/setters)
+- ⚠️ Règle : Tout ce qui est utilisé dans UNE seule classe → **private**, sinon → **public**
+
+**Classes Requises :**
+- ✅ Classe Contact avec attributs demandés
+- ✅ Classe Phonebook avec tableau[8] de Contacts
+
+**Read/Eval Loop dans main() :**
+- Boucle en C++ avec `std::cin`
+- Lire commande → traiter → attendre nouvelle commande jusqu'à EXIT
+
+**Commandes :**
+- ✅ ADD : Implémenté correctement
+- ✅ SEARCH : Implémenté avec `iomanip` (format peut avoir légères déviations)
+- ✅ EXIT : Implémenté dans main() (sortie propre)
+
+**Gestion d'erreurs :**
+- Comportements non spécifiés dans le sujet = OK de choisir
+- Sortir proprement ou gérer erreurs = OK (EOF/Ctrl+D géré dans main)
+- ❌ Segfault = PAS OK
+
+### ⏸️ Exercice 02 : The Job Of Your Dreams
+**Status** : NON COMMENCÉ (optionnel)
+
+---
+
+## SUJET COMPLET DU MODULE
+
+### Chapter IV - Exercise 00: Megaphone
+
+**Exercise** : 00  
+**Turn-in directory**: ex00/  
+**Files to turn in**: Makefile, megaphone.cpp  
+**Forbidden functions**: None  
+
+Just to make sure that everybody is awake, write a program that produces the following output:
+$>./megaphone "shhhhh... I think the students are asleep..."
+SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
+$>./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
+DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
+$>./megaphone
+* LOUD AND UNBEARABLE FEEDBACK NOISE *
+$>
+Solve the exercises in a C++ manner.
+
+---
+
+### Chapter V - Exercise 01: My Awesome PhoneBook
+
+**Exercise** : 01  
+**Turn-in directory**: ex01/  
+**Files to turn in**: Makefile, *.cpp, *.{h, hpp}  
+**Forbidden functions**: None  
+
+Welcome to the 80s and their unbelievable technology! Write a program that behaves like a crappy awesome phonebook software.
+You have to implement two classes:
+• PhoneBook
+◦ It has an array of contacts.
+◦ It can store a maximum of 8 contacts. If the user tries to add a 9th contact,
+replace the oldest one by the new one.
+◦ Please note that dynamic allocation is forbidden.
+• Contact
+◦ Stands for a phonebook contact.
+In your code, the phonebook must be instantiated as an instance of the PhoneBook
+class. Same thing for the contacts. Each one of them must be instantiated as an instance
+of the Contact class. You’re free to design the classes as you like but keep in mind that
+anything that will always be used inside a class is private, and that anything that can be
+used outside a class is public.
+Don’t forget to watch the intranet videos.
+9
+C++ - Module 00
+Namespaces, classes, member functions, stdio streams,
+initialization lists, static, const, and some other basic stuff
+At program start-up, the phonebook is empty and the user is prompted to enter one
+of three commands. The program only accepts ADD, SEARCH and EXIT.
+• ADD: save a new contact
+◦ If the user enters this command, they are prompted to input the information
+of the new contact one field at a time. Once all the fields have been completed,
+add the contact to the phonebook.
+◦ The contact fields are: first name, last name, nickname, phone number, and
+darkest secret. A saved contact can’t have empty fields.
+• SEARCH: display a specific contact
+◦ Display the saved contacts as a list of 4 columns: index, first name, last
+name and nickname.
+◦ Each column must be 10 characters wide. A pipe character (’|’) separates
+them. The text must be right-aligned. If the text is longer than the column,
+it must be truncated and the last displayable character must be replaced by a
+dot (’.’).
+◦ Then, prompt the user again for the index of the entry to display. If the index
+is out of range or wrong, define a relevant behavior. Otherwise, display the
+contact information, one field per line.
+• EXIT
+◦ The program quits and the contacts are lost forever!
+• Any other input is ignored.
+Once a command has been correctly executed, the program waits for another one. It
+stops when the user inputs EXIT.
+Give a relevant name to your executable.
+http://www.cplusplus.com/reference/string/string/ and of course
+http://www.cplusplus.com/reference/iomanip/
+10
+Chapter VI
+Exercise 02: The Job Of Your
+Dreams
+Exercise : 02
+The Job Of Your Dreams
+Turn-in directory: ex02/
+Files to turn in: Makefile, Account.cpp, Account.hpp, tests.cpp
+Forbidden functions: None
+Account.hpp, tests.cpp, and the log file are available for download
+on the module’s intranet page.
+Today is your first day at GlobalBanksters United. After successfully passing the re-
+cruitment tests (thanks to a few Microsoft Office tricks a friend showed you), you joined
+the dev team. You also know the recruiter was amazed by how quickly you installed
+Adobe Reader. That little extra made all the difference and helped you defeat all your
+opponents (aka the other applicants): you made it!
+Anyway, your manager just gave you some work to do. Your first task is to recreate a
+lost file. Something went wrong and a source file was deleted by mistake. Unfortunately,
+your colleagues don’t know what Git is and use USB keys to share code. At this point, it
+would make sense to leave this place right now. However, you decide to stay. Challenge
+accepted!
+Your fellow developers give you a bunch of files. Compiling tests.cpp reveals that
+the missing file is Account.cpp. Lucky you, the header file Account.hpp was saved.
+There is also a log file. Maybe you could use it in order to understand how the Account
+class was implemented.
+11
+C++ - Module 00
+Namespaces, classes, member functions, stdio streams,
+initialization lists, static, const, and some other basic stuff
+You start to recreate the Account.cpp file. In only a few minutes, you code a few
+lines of pure awesome C++. After a couple of failed compilations, your program passes
+the tests. Its output matches perfectly the one saved in the log file (except for the
+timestamps which will obviously differ since the tests saved in the log file were run
+before you were hired).
+Damn, you’re impressive!
+The order in which the destructors are called may differ depending on
+your compiler/operating system. So your destructors may be called in
+a reverse order.
+Completing exercise 02 is not mandatory to pass this module.
