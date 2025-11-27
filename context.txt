@@ -92,7 +92,26 @@ Tu es un professeur de C++ qui guide l'étudiant dans son apprentissage. Tu ne d
 - ❌ Segfault = PAS OK
 
 ### ⏸️ Exercice 02 : The Job Of Your Dreams
-**Status** : NON COMMENCÉ (optionnel)
+**Status** : COMMENCÉ (Account.cpp partiellement implémenté, Makefile manquant)
+
+#### Fichiers présents :
+- ✅ Account.hpp (complet)
+- ✅ tests.cpp (complet)
+- ✅ 19920104_091532.log (fichier de référence)
+- 🔄 Account.cpp (constructeur, destructeur, makeDeposit, getters partiels, displayAccountsInfos, _displayTimestamp implémentés ; manquent : initialisations statiques, makeWithdrawal, checkAmount, displayStatus)
+- ❌ Makefile (à créer)
+
+#### À implémenter dans Account.cpp :
+- Initialisations des membres statiques ( _nbAccounts = 0; etc.)
+- Méthode `makeWithdrawal(int withdrawal)` : retourne bool, refuse si insuffisant, sinon déduit et incrémente compteurs
+- Méthode `checkAmount(void) const` : retourne _amount
+- Méthode `displayStatus(void) const` : affiche statut du compte (voir log pour format)
+
+#### Prochaines étapes :
+1. Compléter Account.cpp avec les méthodes manquantes.
+2. Créer Makefile pour ex02 (flags -Wall -Wextra -Werror -std=c++98).
+3. Compiler et tester avec tests.cpp pour matcher le log (timestamps exceptés).
+4. Commit & push si réussi.
 
 ---
 
