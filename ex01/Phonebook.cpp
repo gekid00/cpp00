@@ -65,10 +65,11 @@ void Phonebook::add_contact()
 	Contact new_contact;
 	std::string input;
 
-	while (input.empty()) // Tant que input est vide
+	while (input.empty())
 	{
 		std::cout << "Enter first name: " << std::endl;
-		std::getline(std::cin, input); // Demande un input
+		if (!std::getline(std::cin, input))
+			return;
 		if (input.empty())
 		{
 			std::cout << "Field cannot be empty!" << std::endl;
@@ -79,7 +80,8 @@ void Phonebook::add_contact()
 	while (input.empty()) // Meme principe pour chaque element
 	{
 		std::cout << "Enter last name: " <<  std::endl;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			return;
 		if (input.empty())
 		{
 			std::cout << "Field cannot be empty!" << std::endl;
@@ -90,7 +92,8 @@ void Phonebook::add_contact()
 	while (input.empty())
 	{
 		std::cout << "Enter nickname: " <<  std::endl;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			return;
 		if (input.empty())
 		{
 			std::cout << "Field cannot be empty!" << std::endl;
@@ -101,7 +104,8 @@ void Phonebook::add_contact()
 	while (input.empty())
 	{
 		std::cout << "Enter phone number: " <<  std::endl;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			return;
 		if (input.empty())
 		{
 			std::cout << "Field cannot be empty!" << std::endl;
@@ -112,7 +116,8 @@ void Phonebook::add_contact()
 	while (input.empty())
 	{
 		std::cout << "Enter dark secret: " <<  std::endl;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			return;
 		if (input.empty())
 		{
 			std::cout << "Field cannot be empty!" << std::endl;
@@ -181,7 +186,8 @@ void Phonebook::search_contact()
 	// Demander l'index à afficher
 	std::cout << "Enter index to display: ";
 	std::string input;
-	std::getline(std::cin, input);
+	if (!std::getline(std::cin, input))
+		return;
 	
 	// Vérifier si l'input est un nombre valide
 	std::stringstream ss(input);
