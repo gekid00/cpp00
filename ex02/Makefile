@@ -1,4 +1,4 @@
-NAME = Account
+NAME = tester
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
